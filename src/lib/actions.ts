@@ -1,6 +1,6 @@
 "use server"
 
-import { signIn } from "~/auth"
+import { signIn } from "~/src/auth"
 import bcrypt from "bcrypt"
 import { z } from "zod"
 

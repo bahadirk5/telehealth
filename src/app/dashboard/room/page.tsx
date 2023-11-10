@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation"
-import { auth } from "~/auth"
+import { auth } from "~/src/auth"
 
 import { VideoCall } from "@/components/video-call/video-call"
 

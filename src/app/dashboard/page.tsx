@@ -1,4 +1,4 @@
-import { auth, signOut } from "~/auth"
+import { auth, signOut } from "~/src/auth"
 
 export default async function Dashboard() {
   const session = await auth()
