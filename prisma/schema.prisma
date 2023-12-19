@@ -38,22 +38,111 @@ model Session {
   @@index([userId])
 }
 
-model User {
-  id        String   @id @default(cuid())
-  name      String
-  email     String   @unique
-  password  String
-  createdAt DateTime @default(now()) @map(name: "created_at")
-  updatedAt DateTime @updatedAt
-
-  accounts Account[]
-  sessions Session[]
-}
-
 model VerificationToken {
   identifier String
   token      String   @unique
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String
+  email         String    @unique
+  emailVerified DateTime?
+  password      String?
+  createdAt     DateTime  @default(now()) @map(name: "created_at")
+  updatedAt     DateTime  @updatedAt
+  image         String?
+  role          UserRole  @default(Client)
+
+  provider Provider?
+
+  accounts Account[]
+  sessions Session[]
+}
+
+model Provider {
+  userId          String  @unique
+  image           String?
+  specialties     String
+  about           String
+  meetingDuration Int?
+
+  schedule     Schedule?
+  user         User          @relation(fields: [userId], references: [id])
+  appointments Appointment[]
+
+  @@index([userId])
+}
+
+model Appointment {
+  id          String  @id @default(cuid())
+  patientName String
+  reason      String?
+  slotId      String
+  providerId  String
+
+  timeSlot TimeSlot @relation(fields: [slotId], references: [id])
+  provider Provider @relation(fields: [providerId], references: [userId])
+
+  @@index([slotId])
+  @@index([providerId])
+  @@map("appointments")
+}
+
+model Schedule {
+  id         String   @id @default(cuid())
+  createdAt  DateTime @default(now()) @map(name: "created_at")
+  updatedAt  DateTime @updatedAt
+  providerId String?  @unique
+
+  selectedDays SelectedDay[]
+
+  provider Provider? @relation(fields: [providerId], references: [userId])
+
+  @@index([providerId])
+  @@map("schedule")
+}
+
+model SelectedDay {
+  id         String  @id @default(cuid())
+  day        WeekDay
+  scheduleId String
+
+  timeSlots TimeSlot[]
+
+  schedule Schedule @relation(fields: [scheduleId], references: [id])
+
+  @@unique([day, scheduleId])
+  @@index([scheduleId])
+}
+
+model TimeSlot {
+  id            String @id @default(cuid())
+  startTime     String
+  endTime       String
+  selectedDayId String
+
+  selectedDay SelectedDay   @relation(fields: [selectedDayId], references: [id])
+  Appointment Appointment[]
+
+  @@index([selectedDayId])
+}
+
+enum WeekDay {
+  Monday
+  Tuesday
+  Wednesday
+  Thursday
+  Friday
+  Saturday
+  Sunday
+}
+
+enum UserRole {
+  Admin
+  Provider
+  Client
 }

@@ -1,33 +1,38 @@
 "use client"
 
 import * as React from "react"
+import { register } from "@/actions/register"
 import { Loader2 } from "lucide-react"
-import { useFormState, useFormStatus } from "react-dom"
+import { useFormStatus } from "react-dom"
 
-import { register } from "@/lib/actions"
 import { cn } from "@/lib/utils"
+import { useAction } from "@/hooks/use-action"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 
 export function RegisterForm() {
-  const initialState = { message: null, errors: {} }
-  const [state, action] = useFormState(register, initialState)
   const { pending } = useFormStatus()
+  const { execute, fieldErrors } = useAction(register, {
+    onSuccess: (data) => {
+      console.log(data, "SUCCESS")
+    },
+    onError: (error) => {
+      console.log(error)
+    },
+  })
 
+  const onSubmit = (formData: FormData) => {
+    const name = formData.get("name") as string
+    const email = formData.get("email") as string
+    const password = formData.get("password") as string
+
+    execute({ name, email, password })
+  }
   return (
     <div className={cn("grid gap-6")}>
-      <form action={action}>
+      <form action={onSubmit}>
         <div className="grid gap-4">
-          {state.message && (
-            <div
-              id="name-error"
-              aria-live="polite"
-              className="px-1 text-xs text-red-600"
-            >
-              <p key={state.message}>{state.message}</p>
-            </div>
-          )}
           <div className="grid gap-2">
             <Label htmlFor="name">Name</Label>
             <Input
@@ -38,13 +43,13 @@ export function RegisterForm() {
               disabled={pending}
               required
             />
-            {state.errors?.name ? (
+            {fieldErrors?.name ? (
               <div
                 id="name-error"
                 aria-live="polite"
-                className="px-1 text-xs text-red-600"
+                className="px-1 text-xs text-rose-500"
               >
-                {state.errors.name.map((error: string) => (
+                {fieldErrors.name.map((error: string) => (
                   <p key={error}>{error}</p>
                 ))}
               </div>
@@ -60,13 +65,13 @@ export function RegisterForm() {
               disabled={pending}
               required
             />
-            {state.errors?.email ? (
+            {fieldErrors?.email ? (
               <div
                 id="name-error"
                 aria-live="polite"
-                className="px-1 text-xs text-red-600"
+                className="px-1 text-xs text-rose-500"
               >
-                {state.errors.email.map((error: string) => (
+                {fieldErrors.email.map((error: string) => (
                   <p key={error}>{error}</p>
                 ))}
               </div>
@@ -81,13 +86,13 @@ export function RegisterForm() {
               disabled={pending}
               required
             />
-            {state.errors?.password ? (
+            {fieldErrors?.password ? (
               <div
                 id="name-error"
                 aria-live="polite"
-                className="px-1 text-xs text-red-600"
+                className="px-1 text-xs text-rose-500"
               >
-                {state.errors.password.map((error: string) => (
+                {fieldErrors.password.map((error: string) => (
                   <p key={error}>{error}</p>
                 ))}
               </div>

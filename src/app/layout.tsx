@@ -4,6 +4,8 @@ import { inter } from "@/components/ui/fonts"
 
 import "@/styles/global.css"
 
+import { ThemeProvider } from "@/providers/theme-provider"
+
 import { cn } from "@/lib/utils"
 import { Toaster } from "@/components/ui/toaster"
 
@@ -18,10 +20,22 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <body className={cn(inter.className, "antialiased")}>
-        {children}
-        <Toaster />
+    <html lang="en" suppressHydrationWarning>
+      <body
+        className={cn(
+          inter.className,
+          "min-h-screen bg-background font-sans antialiased"
+        )}
+      >
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+          <Toaster />
+        </ThemeProvider>
       </body>
     </html>
   )

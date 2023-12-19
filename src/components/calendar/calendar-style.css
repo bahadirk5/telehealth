@@ -1,0 +1,96 @@
+.fc .fc-prev-button,
+.fc .fc-next-button {
+  @apply inline-flex
+  h-10 
+  items-center 
+  justify-center 
+  rounded-md 
+  bg-primary 
+  px-4 
+  py-2 
+  text-sm 
+  font-medium 
+  text-primary-foreground 
+  ring-offset-background 
+  transition-colors;
+}
+
+.fc .fc-prev-button:hover,
+.fc .fc-next-button:hover {
+  @apply bg-primary 
+  text-primary-foreground 
+  hover:bg-primary/90;
+}
+
+.fc .fc-prev-button:active,
+.fc .fc-next-button:active {
+  @apply !ring-0;
+}
+
+.fc .fc-today-button {
+  @apply inline-flex 
+  h-10 
+  items-center 
+  justify-center 
+  rounded-md 
+  bg-secondary 
+  px-4 
+  py-2 
+  text-sm 
+  font-medium 
+  text-secondary-foreground 
+  transition-colors;
+}
+
+.fc .fc-today-button:hover {
+  @apply bg-secondary 
+  text-secondary-foreground 
+  hover:bg-secondary/80;
+}
+
+.fc .fc-today-button:active {
+  @apply bg-secondary 
+  !text-secondary-foreground 
+  !ring-0 
+  active:bg-secondary;
+}
+
+.fc .fc-today-button:disabled {
+  @apply bg-secondary
+  text-secondary-foreground
+  disabled:pointer-events-none
+  disabled:opacity-50;
+}
+
+.fc .fc-toolbar-title {
+  @apply scroll-m-20 
+  pb-2 
+  text-3xl 
+  font-semibold 
+  tracking-tight 
+  first:mt-0;
+}
+
+.fc .fc-col-header-cell-cushion {
+  @apply scroll-m-20 
+  text-xl 
+  font-semibold 
+  tracking-tight;
+}
+
+.fc .fc-timegrid-axis-cushion {
+  @apply font-medium leading-7 tracking-tight;
+}
+
+.fc .fc-timegrid-slot-label {
+  @apply font-medium leading-7 tracking-tight;
+}
+
+table {
+  @apply rounded-md;
+}
+
+.fc-scrollgrid-sync-inner {
+  @apply items-center justify-center p-2;
+}
+
