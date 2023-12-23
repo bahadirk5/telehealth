@@ -1,6 +1,5 @@
 import Link from "next/link"
 
-import getCurrentUser from "@/lib/session"
 import ScrolledNav from "@/components/scrolled-nav"
 
 import { MarketingNav } from "./marketing-nav"
@@ -8,7 +7,6 @@ import { ThemeToggle } from "./theme-toggle"
 import { UserAccountNav } from "./user-account-nav"
 
 export async function LandingNavbar() {
-  const user = await getCurrentUser()
 
   return (
     <ScrolledNav>
@@ -25,7 +23,7 @@ export async function LandingNavbar() {
           </div>
           <div className="hidden items-center gap-4 md:flex">
             <ThemeToggle />
-            <UserAccountNav currentUser={user} />
+            <UserAccountNav />
           </div>
         </div>
       </div>

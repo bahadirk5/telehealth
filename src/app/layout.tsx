@@ -4,10 +4,9 @@ import { inter } from "@/components/ui/fonts"
 
 import "@/styles/global.css"
 
-import { ThemeProvider } from "@/providers/theme-provider"
-
 import { cn } from "@/lib/utils"
 import { Toaster } from "@/components/ui/toaster"
+import { Providers } from "@/providers/providers"
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -27,15 +26,10 @@ export default function RootLayout({
           "min-h-screen bg-background font-sans antialiased"
         )}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem
-          disableTransitionOnChange
-        >
+        <Providers>
           {children}
           <Toaster />
-        </ThemeProvider>
+        </Providers>
       </body>
     </html>
   )

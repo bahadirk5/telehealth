@@ -3,7 +3,6 @@
 import React, { useState } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Icon } from "@iconify/react"
 
 import { DoctorDashboardItem } from "@/types/doctor-dasboard"
 import { SIDENAV_ITEMS } from "@/config/doctor-dashboard"
@@ -60,21 +59,12 @@ const MenuItem = ({ item }: { item: DoctorDashboardItem }) => {
             )}
           >
             <div className="flex flex-row items-center">
-              <Icon
-                icon={item.icon ? item.icon : ""}
-                className={cn(
-                  "mr-3 h-5 w-5 text-muted-foreground group-hover:text-primary",
-                  pathname.includes(item.path) && "text-primary"
-                )}
-              />
               <span className="flex scroll-m-20 font-semibold tracking-tight">
                 {item.title}
               </span>
             </div>
 
-            <div className={cn(subMenuOpen && "rotate-180", "flex")}>
-              <Icon icon="lucide:chevron-down" width="24" height="24" />
-            </div>
+            <div className={cn(subMenuOpen && "rotate-180", "flex")}></div>
           </button>
 
           {subMenuOpen && (
@@ -103,13 +93,6 @@ const MenuItem = ({ item }: { item: DoctorDashboardItem }) => {
               item.path === pathname && "bg-secondary text-primary"
             )}
           >
-            <Icon
-              icon={item.icon ? item.icon : ""}
-              className={cn(
-                "mr-3 h-5 w-5 text-muted-foreground group-hover:text-primary",
-                item.path === pathname && "text-primary"
-              )}
-            />
             <span>{item.title}</span>
           </span>
         </Link>

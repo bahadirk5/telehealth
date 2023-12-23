@@ -7,7 +7,6 @@ interface LayoutProps {
 export default function Layout({ children }: LayoutProps) {
   return (
     <>
-      {/* @ts-expect-error Server Component */}
       <LandingNavbar />
       {children}
     </>

@@ -16,8 +16,8 @@ export default async function DashboardLayout({
       <SideNav />
       <main className="flex-1">
         <MarginWidthWrapper>
-          <Header />
-          <HeaderMobile />
+          {/* <Header /> */}
+          {/* <HeaderMobile /> */}
           <PageWrapper>{children}</PageWrapper>
         </MarginWidthWrapper>
       </main>

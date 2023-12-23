@@ -1,8 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { User } from "@prisma/client"
-import { signIn, signOut } from "next-auth/react"
+import { signIn, signOut, useSession } from "next-auth/react"
 
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import {
@@ -16,19 +15,18 @@ import {
 import { Icons } from "./icons"
 import { UserAvatar } from "./user-avatar"
 
-interface NavbarProps {
-  currentUser?: User | null
-}
 
-export function UserAccountNav({ currentUser }: NavbarProps) {
+export function UserAccountNav() {
+  const { data: session } = useSession();
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
-        {currentUser ? (
+        {session?.user ? (
           <UserAvatar
             user={{
-              name: currentUser.name,
-              image: currentUser.image || null,
+              name: session.user.name as string,
+              image: session.user.image || null,
             }}
             className="h-8 w-8"
           />
@@ -41,22 +39,22 @@ export function UserAccountNav({ currentUser }: NavbarProps) {
         )}
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        {currentUser ? (
+        {session?.user ? (
           <>
             <div className="flex items-center justify-start gap-2 p-2">
               <div className="flex flex-col space-y-1 leading-none">
-                {currentUser.name && (
-                  <p className="font-medium">{currentUser.name}</p>
+                {session.user.name && (
+                  <p className="font-medium">{session.user.name}</p>
                 )}
-                {currentUser.email && (
+                {session.user.email && (
                   <p className="w-[200px] truncate text-sm text-muted-foreground">
-                    {currentUser.email}
+                    {session.user.email}
                   </p>
                 )}
               </div>
             </div>
             <DropdownMenuSeparator />
-            {currentUser.role === "Provider" ? (
+            {session.user.role === "Provider" ? (
               <>
                 <DropdownMenuItem asChild>
                   <Link href="/provider-dashboard">Dashboard</Link>
