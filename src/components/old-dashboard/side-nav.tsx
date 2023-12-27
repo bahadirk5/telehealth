@@ -3,6 +3,7 @@
 import React, { useState } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import { ChevronDown } from "lucide-react"
 
 import { DoctorDashboardItem } from "@/types/doctor-dasboard"
 import { SIDENAV_ITEMS } from "@/config/doctor-dashboard"
@@ -64,7 +65,9 @@ const MenuItem = ({ item }: { item: DoctorDashboardItem }) => {
               </span>
             </div>
 
-            <div className={cn(subMenuOpen && "rotate-180", "flex")}></div>
+            <div className={cn(subMenuOpen && "rotate-180", "flex")}>
+              <ChevronDown className="h-6 w-6" />
+            </div>
           </button>
 
           {subMenuOpen && (

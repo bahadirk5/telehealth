@@ -1,12 +1,18 @@
-"use client";
+"use client"
 
-import { SessionProvider } from "next-auth/react";
-import { ThemeProvider } from "./theme-provider";
+import { SessionProvider } from "next-auth/react"
+
+import { Toaster } from "@/components/ui/sonner"
+
+import { ThemeProvider } from "./theme-provider"
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
-    <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
-      <SessionProvider>{children}</SessionProvider>
-    </ThemeProvider>
-  );
+    <SessionProvider>
+      <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+        <Toaster />
+        {children}
+      </ThemeProvider>
+    </SessionProvider>
+  )
 }

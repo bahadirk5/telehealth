@@ -30,7 +30,7 @@ export const authOptions: NextAuthOptions = {
           name: `${profile.given_name} ${profile.family_name}`,
           email: profile.email,
           image: profile.picture,
-          role: profile.role ? profile.role : "user",
+          role: profile.role,
         };
       },
     }),

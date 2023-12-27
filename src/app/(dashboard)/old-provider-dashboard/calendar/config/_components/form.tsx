@@ -1,9 +1,9 @@
 "use client"
 
-import React from "react"
+import * as React from "react"
 import { useRouter } from "next/navigation"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { Icon } from "@iconify/react"
+
 import { WeekDay } from "@prisma/client"
 import axios from "axios"
 import { Controller, useFieldArray, useForm } from "react-hook-form"
@@ -195,7 +195,7 @@ export function CalendarConfigForm({ defaultValues }: CalendarConfigFormProps) {
                         onClick={() => fieldArrays[day].remove(index)}
                         className="text-destructive"
                       >
-                        <Icon icon="ph:x" className="h-5 w-5" />
+                        X
                       </button>
                     </div>
                   ))}

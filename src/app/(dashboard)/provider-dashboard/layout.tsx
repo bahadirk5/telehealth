@@ -1,26 +1,31 @@
-import Header from "@/components/dashboard/header"
-import HeaderMobile from "@/components/dashboard/header-mobile"
-import MarginWidthWrapper from "@/components/dashboard/margin-width-wrapper"
-import PageWrapper from "@/components/dashboard/page-wrapper"
-import SideNav from "@/components/dashboard/side-nav"
+import { cookies } from "next/headers"
 
-interface DashboardLayoutProps {
-  children?: React.ReactNode
-}
+import { ResizableArea } from "@/components/dashboard/resizable-area"
 
 export default async function DashboardLayout({
   children,
-}: DashboardLayoutProps) {
+}: {
+  children: React.ReactNode
+}) {
+  const layout = cookies().get("react-resizable-panels:layout")
+  const collapsed = cookies().get("react-resizable-panels:collapsed")
+
+  const defaultLayout = layout ? JSON.parse(layout.value) : undefined
+  const defaultCollapsed = collapsed ? JSON.parse(collapsed.value) : undefined
+
   return (
     <div className="flex">
-      <SideNav />
-      <main className="flex-1">
-        <MarginWidthWrapper>
-          {/* <Header /> */}
-          {/* <HeaderMobile /> */}
-          <PageWrapper>{children}</PageWrapper>
-        </MarginWidthWrapper>
-      </main>
+      <ResizableArea
+        defaultLayout={defaultLayout}
+        defaultCollapsed={defaultCollapsed}
+        navCollapsedSize={4}
+      >
+        <div className="min-h-screen">
+          <div className="flex max-w-screen-xl flex-col space-y-12 p-8">
+            {children}
+          </div>
+        </div>
+      </ResizableArea>
     </div>
   )
 }

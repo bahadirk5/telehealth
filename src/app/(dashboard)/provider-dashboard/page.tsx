@@ -1,27 +1,15 @@
-import { auth, signOut } from "@/auth"
+import Uploader from "@/components/uploader";
 
-import { Button } from "@/components/ui/button"
-
-export default async function Dashboard() {
-  const session = await auth()
-
+export default function Overview() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <h1>
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">
-            {JSON.stringify(session?.user, null, 2)}
-          </code>
-        </pre>
-      </h1>
-      <form
-        action={async () => {
-          "use server"
-          await signOut()
-        }}
-      >
-        <Button type="submit">Sing out</Button>
-      </form>
-    </main>
+    <>
+      <div className="flex flex-col space-y-6">
+        <h1 className="text-3xl font-bold">Overview</h1>
+      </div>
+      Lorem ipsum dolor sit amet.
+      <div className="space-y-10">
+        <Uploader defaultValue={null} name="image" />
+      </div>
+    </>
   )
 }

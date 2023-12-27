@@ -1,9 +1,9 @@
-import { auth } from "@/auth"
 import { WeekDay } from "@prisma/client"
 
+import { getServerAuthSession } from "@/lib/auth"
 import { db } from "@/lib/db"
-import { DashboardHeader } from "@/components/dashboard/dashboard-header"
-import { DashboardShell } from "@/components/dashboard/shell"
+import { DashboardHeader } from "@/components/old-dashboard/dashboard-header"
+import { DashboardShell } from "@/components/old-dashboard/shell"
 
 import { CalendarConfigForm } from "./_components/form"
 
@@ -21,7 +21,7 @@ export default async function Config() {
   async function fetchSchedule() {
     "use server"
 
-    const session = await auth()
+    const session = await getServerAuthSession()
 
     if (!session) return null
 

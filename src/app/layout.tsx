@@ -4,9 +4,9 @@ import { inter } from "@/components/ui/fonts"
 
 import "@/styles/global.css"
 
-import { cn } from "@/lib/utils"
-import { Toaster } from "@/components/ui/toaster"
 import { Providers } from "@/providers/providers"
+
+import { cn } from "@/lib/utils"
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -26,10 +26,7 @@ export default function RootLayout({
           "min-h-screen bg-background font-sans antialiased"
         )}
       >
-        <Providers>
-          {children}
-          <Toaster />
-        </Providers>
+        <Providers>{children}</Providers>
       </body>
     </html>
   )
