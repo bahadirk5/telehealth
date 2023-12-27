@@ -1,21 +1,8 @@
-import { PrismaAdapter } from "@next-auth/prisma-adapter";
-import {
-  getServerSession,
-  type DefaultSession,
-  type NextAuthOptions,
-} from "next-auth";
-import GoogleProvider from "next-auth/providers/google";
+import { PrismaAdapter } from "@next-auth/prisma-adapter"
+import { getServerSession, type NextAuthOptions } from "next-auth"
+import GoogleProvider from "next-auth/providers/google"
 
-import { db } from "@/lib/db";
-
-declare module "next-auth" {
-  interface Session extends DefaultSession {
-    user: {
-      id: string;
-      role: string;
-    } & DefaultSession["user"];
-  }
-}
+import { db } from "@/lib/db"
 
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(db),
@@ -31,24 +18,24 @@ export const authOptions: NextAuthOptions = {
           email: profile.email,
           image: profile.picture,
           role: profile.role,
-        };
+        }
       },
     }),
   ],
   callbacks: {
     async jwt({ token, user }) {
-      if (user && "role" in user) {
-        token.role = user.role ? user.role : undefined;
+      if (user) {
+        token.id = user.id
+        token.role = user.role
       }
-      return token;
+      return token
     },
     async session({ session, token }) {
-      if (typeof token.role === "string") {
-        session.user.role = token.role;
-      }
-      return session;
+      session.user.id = token.id as string
+      session.user.role = token.role
+      return session
     },
   },
-};
+}
 
-export const getServerAuthSession = () => getServerSession(authOptions);
+export const getServerAuthSession = () => getServerSession(authOptions)
