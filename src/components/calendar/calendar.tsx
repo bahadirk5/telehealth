@@ -45,12 +45,12 @@ function transformSelectedDaysToEvents(selectedDays: SelectedDay[]): any[] {
     daySchedule.timeSlots.forEach((timeSlot) => {
       const currentDate = moment().isoWeekday(dayIndex) // Use isoWeekday for correct day mapping
       const startDateTime = currentDate.clone().set({
-        hour: parseInt(timeSlot.startTime.split(":")[0]),
-        minute: parseInt(timeSlot.startTime.split(":")[1]),
+        hour: parseInt(timeSlot.startTime.split(":")[0] as string),
+        minute: parseInt(timeSlot.startTime.split(":")[1] as string),
       })
       const endDateTime = currentDate.clone().set({
-        hour: parseInt(timeSlot.endTime.split(":")[0]),
-        minute: parseInt(timeSlot.endTime.split(":")[1]),
+        hour: parseInt(timeSlot.endTime.split(":")[0] as string),
+        minute: parseInt(timeSlot.endTime.split(":")[1] as string),
       })
 
       events.push({

@@ -1,9 +1,8 @@
-import { revalidatePath } from "next/cache"
-import { auth } from "@/auth"
 import { WeekDay } from "@prisma/client"
 import * as z from "zod"
 
 import { db } from "@/lib/db"
+import { getServerAuthSession } from "@/lib/auth"
 
 const scheduleSchema = z.object({
   selectedDays: z.array(
@@ -39,7 +38,7 @@ interface ScheduleRequestBody {
 
 export async function POST(req: Request) {
   try {
-    const session = await auth()
+    const session = await getServerAuthSession()
 
     if (!session || session.user?.role !== "Provider") {
       return new Response("Unauthorized", { status: 403 })

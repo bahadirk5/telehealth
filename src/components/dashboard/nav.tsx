@@ -62,7 +62,7 @@ export function Nav({ links, isCollapsed }: NavProps) {
                 <>
                   <Button
                     onClick={toggleSubMenu}
-                    variant={link.path === pathname ? "default" : "ghost"}
+                    variant={pathname.includes(link.path) ? "default" : "ghost"}
                     size="sm"
                     className="group items-center justify-between"
                   >

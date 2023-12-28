@@ -2,20 +2,19 @@
 
 import * as React from "react"
 import Link from "next/link"
-import {
-  DollarSign,
-} from "lucide-react"
+import { DollarSign } from "lucide-react"
 
+import { SIDENAV_ITEMS } from "@/config/doctor-dashboard"
 import { cn } from "@/lib/utils"
 import {
   ResizableHandle,
   ResizablePanel,
   ResizablePanelGroup,
 } from "@/components/ui/resizable"
+import { ScrollArea } from "@/components/ui/scroll-area"
 import { TooltipProvider } from "@/components/ui/tooltip"
 import { Nav } from "@/components/dashboard/nav"
 import { UserNav } from "@/components/dashboard/user-nav"
-import { SIDENAV_ITEMS } from "@/config/doctor-dashboard"
 
 interface ResizableArea {
   defaultLayout: number[] | undefined
@@ -41,7 +40,7 @@ export function ResizableArea({
             sizes
           )}`
         }}
-        className="flex min-h-screen flex-col items-stretch"
+        className="flex min-h-screen"
       >
         <ResizablePanel
           defaultSize={defaultLayout[0]}
@@ -56,7 +55,7 @@ export function ResizableArea({
             )}`
           }}
           className={cn(
-            "flex flex-col",
+            "flex h-screen flex-col overflow-y-auto",
             isCollapsed &&
               "min-w-[50px] transition-all duration-300 ease-in-out"
           )}
@@ -67,7 +66,7 @@ export function ResizableArea({
                 <div className="space-y-1">
                   <Link
                     href="/provider-dashboard"
-                    className="flex items-center px-2 gap-2 py-6 text-2xl font-semibold tracking-tight"
+                    className="flex items-center gap-2 px-2 py-6 text-2xl font-semibold tracking-tight"
                   >
                     {isCollapsed ? (
                       <DollarSign className="h-8 w-8 text-green-700 lg:ml-1" />
@@ -78,17 +77,14 @@ export function ResizableArea({
                       </span>
                     )}
                   </Link>
-                  <Nav
-                    isCollapsed={isCollapsed}
-                    links={SIDENAV_ITEMS}
-                  />
+                  <Nav isCollapsed={isCollapsed} links={SIDENAV_ITEMS} />
                 </div>
               </div>
             </div>
           </div>
           <div
             className={cn(
-              "mb-8 flex h-[52px] w-full items-center justify-center",
+              "mb-8 mt-auto flex h-[52px] w-full items-center justify-center",
               isCollapsed ? "h-[52px]" : "px-2"
             )}
           >
@@ -97,7 +93,7 @@ export function ResizableArea({
         </ResizablePanel>
         <ResizableHandle withHandle />
         <ResizablePanel defaultSize={defaultLayout[1]}>
-          {children}
+          <ScrollArea className="h-screen">{children}</ScrollArea>
         </ResizablePanel>
       </ResizablePanelGroup>
     </TooltipProvider>
