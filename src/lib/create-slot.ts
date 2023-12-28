@@ -23,12 +23,12 @@ export function generateSlotTimes(
       if (dayTimeRanges) {
         dayTimeRanges.forEach((timeRange) => {
           let startTime = getNextDateForDay(day, week).set({
-            hour: parseInt(timeRange.start.split(":")[0]),
-            minute: parseInt(timeRange.start.split(":")[1]),
+            hour: parseInt(timeRange.start.split(":")[0] as string),
+            minute: parseInt(timeRange.start.split(":")[1] as string),
           })
           const endTime = getNextDateForDay(day, week).set({
-            hour: parseInt(timeRange.end.split(":")[0]),
-            minute: parseInt(timeRange.end.split(":")[1]),
+            hour: parseInt(timeRange.end.split(":")[0] as string),
+            minute: parseInt(timeRange.end.split(":")[1] as string),
           })
 
           while (startTime.isBefore(endTime)) {

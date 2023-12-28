@@ -3,10 +3,10 @@
 import * as React from "react"
 import { useRouter } from "next/navigation"
 import { zodResolver } from "@hookform/resolvers/zod"
-
 import { WeekDay } from "@prisma/client"
 import axios from "axios"
 import { Controller, useFieldArray, useForm } from "react-hook-form"
+import { toast } from "sonner"
 import { z } from "zod"
 
 import { Button } from "@/components/ui/button"
@@ -14,7 +14,6 @@ import { Form } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Switch } from "@/components/ui/switch"
-import { toast } from "@/components/ui/use-toast"
 import { Icons } from "@/components/icons"
 
 type TimeRange = { start: string; end: string }
@@ -104,12 +103,7 @@ export function CalendarConfigForm({ defaultValues }: CalendarConfigFormProps) {
       })
 
       if (!allSelectedDaysHaveTimeRanges) {
-        toast({
-          variant: "destructive",
-          title: "Error",
-          description:
-            "Please set at least one time range for each selected day.",
-        })
+        toast.error("Please set at least one time range for each selected day.")
         return
       }
 
@@ -134,10 +128,7 @@ export function CalendarConfigForm({ defaultValues }: CalendarConfigFormProps) {
 
       // Handle success
       if (response.status === 200) {
-        toast({
-          title: "Success",
-          description: "Form submitted successfully!",
-        })
+        toast.success("Form submitted successfully!")
         router.refresh()
       } else {
         throw new Error(`Request failed with status code ${response.status}`)
@@ -145,11 +136,7 @@ export function CalendarConfigForm({ defaultValues }: CalendarConfigFormProps) {
     } catch (error) {
       // Handle errors
       console.error("Form submission error", error)
-      toast({
-        variant: "destructive",
-        title: "Error",
-        description: "Error submitting form.",
-      })
+      toast.error("Error submitting form.")
     } finally {
       // Reset the saving state in both success and failure cases
       setIsSaving(false)
