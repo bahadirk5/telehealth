@@ -65,8 +65,7 @@ model User {
 model Provider {
   userId          String  @unique
   image           String?
-  specialties     String
-  about           String
+  specialty       String
   meetingDuration Int?
 
   schedule     Schedule?

@@ -3,7 +3,7 @@
 import Link from "next/link"
 import { signIn, signOut, useSession } from "next-auth/react"
 
-import { Avatar, AvatarFallback } from "@/components/ui/avatar"
+import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,18 +11,15 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-
-import { Icons } from "./icons"
-import { UserAvatar } from "./user-avatar"
-
+import { UserAvatar } from "@/components/user-avatar"
 
 export function UserAccountNav() {
-  const { data: session } = useSession();
+  const { data: session } = useSession()
 
-  return (
-    <DropdownMenu>
-      <DropdownMenuTrigger>
-        {session?.user ? (
+  if (session?.user) {
+    return (
+      <DropdownMenu>
+        <DropdownMenuTrigger>
           <UserAvatar
             user={{
               name: session.user.name as string,
@@ -30,16 +27,8 @@ export function UserAccountNav() {
             }}
             className="h-8 w-8"
           />
-        ) : (
-          <Avatar>
-            <AvatarFallback>
-              <Icons.user className="h-6 w-6" />
-            </AvatarFallback>
-          </Avatar>
-        )}
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
-        {session?.user ? (
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="end">
           <>
             <div className="flex items-center justify-start gap-2 p-2">
               <div className="flex flex-col space-y-1 leading-none">
@@ -77,17 +66,10 @@ export function UserAccountNav() {
               Sign out
             </DropdownMenuItem>
           </>
-        ) : (
-          <>
-            <DropdownMenuItem
-              className="cursor-pointer"
-              onClick={() => signIn("google")}
-            >
-              Login
-            </DropdownMenuItem>
-          </>
-        )}
-      </DropdownMenuContent>
-    </DropdownMenu>
-  )
+        </DropdownMenuContent>
+      </DropdownMenu>
+    )
+  }
+
+  return <Button size="sm" onClick={() => signIn("google")}>Login</Button>
 }

@@ -69,7 +69,7 @@ export function ResizableArea({
                     className="flex items-center gap-2 px-2 py-6 text-2xl font-semibold tracking-tight"
                   >
                     {isCollapsed ? (
-                      <DollarSign className="h-8 w-8 text-green-700 lg:ml-1" />
+                      <DollarSign className="mx-auto h-8 w-8 text-green-700" />
                     ) : (
                       <span className="flex items-center">
                         <DollarSign className="mr-1 h-8 w-8 text-green-700" />

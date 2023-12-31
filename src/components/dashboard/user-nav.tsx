@@ -56,13 +56,13 @@ export function UserNav({ isCollapsed }: { isCollapsed: boolean }) {
 
       <DropdownMenuContent className="w-full lg:w-56" align="end" forceMount>
         <DropdownMenuGroup>
-          <Link href="/onboarding">
+          <Link href="/">
             <DropdownMenuItem>
               <Rocket className="mr-2 h-4 w-4" />
-              <span>Onboarding</span>
+              <span>Main site</span>
             </DropdownMenuItem>
           </Link>
-          <Link href="/docs" target="_blank">
+          <Link href="/provider-dashboard">
             <DropdownMenuItem>
               <Book className="mr-2 h-4 w-4" />
               <span>Docs</span>
