@@ -3,7 +3,6 @@ import { WeekDay } from "@prisma/client"
 import { getServerAuthSession } from "@/lib/auth"
 import { db } from "@/lib/db"
 import { DashboardHeader } from "@/components/dashboard/dashboard-header"
-import { DashboardShell } from "@/components/old-dashboard/shell"
 
 import { CalendarConfigForm } from "./_components/form"
 
@@ -67,15 +66,5 @@ export default async function Config() {
     timeRanges: {},
   }
 
-  return (
-    <>
-      <DashboardHeader
-        heading="Weekly Schedule Manager"
-        text="Set and manage your weekly working hours easily."
-      ></DashboardHeader>
-      <div className="px-2">
-        <CalendarConfigForm defaultValues={schedule || defaultFormValues} />
-      </div>
-    </>
-  )
+  return <CalendarConfigForm defaultValues={schedule || defaultFormValues} />
 }

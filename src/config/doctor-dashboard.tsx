@@ -1,8 +1,6 @@
+import { Calendar, KanbanSquare, Settings } from "lucide-react"
+
 import { DoctorDashboardItem } from "@/types/doctor-dasboard"
-import {
-  KanbanSquare,
-  Calendar,
-} from "lucide-react"
 
 export const SIDENAV_ITEMS: DoctorDashboardItem[] = [
   {
@@ -14,10 +12,10 @@ export const SIDENAV_ITEMS: DoctorDashboardItem[] = [
     title: "Calendar",
     path: "/provider-dashboard/calendar",
     icon: Calendar,
-    submenu: true,
-    subMenuItems: [
-      { title: "Config", path: "/provider-dashboard/calendar/config" },
-      { title: "Calendar", path: "/provider-dashboard/calendar" },
-    ],
+  },
+  {
+    title: "Settings",
+    path: "/provider-dashboard/settings",
+    icon: Settings,
   },
 ]
