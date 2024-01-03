@@ -3,7 +3,7 @@ import Link from "next/link"
 import ScrolledNav from "@/components/scrolled-nav"
 
 import { MarketingNav } from "./marketing-nav"
-import { ThemeToggle } from "./theme-toggle"
+import { ThemeToggle } from "../theme-toggle"
 import { UserAccountNav } from "./user-account-nav"
 
 export async function LandingNavbar() {

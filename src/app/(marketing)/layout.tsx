@@ -1,4 +1,4 @@
-import { LandingNavbar } from "@/components/landing-nav"
+import { LandingNavbar } from "@/components/marketing/landing-nav"
 
 interface LayoutProps {
   children: React.ReactNode

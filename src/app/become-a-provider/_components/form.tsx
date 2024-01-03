@@ -42,8 +42,8 @@ export function BecomeAProviderForm() {
   const router = useRouter()
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
+    setIsSaving(true)
     try {
-      setIsSaving(true)
       await axios.post("/api/provider/enroll", values)
       toast.success("Enrollment successful")
       await update({ role: "Provider" })

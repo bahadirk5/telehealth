@@ -15,31 +15,13 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 
-export function UserNav({ isCollapsed }: { isCollapsed: boolean }) {
+export function UserNav() {
   const { data: session } = useSession()
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="flex w-full items-center justify-between gap-4 rounded px-2 py-1 hover:bg-zinc-100 dark:hover:bg-zinc-700">
-        {!isCollapsed ? (
-          <>
-            <div className="flex w-full items-center justify-start gap-4 ">
-              <Avatar>
-                {session?.user.image ? (
-                  <AvatarImage
-                    src={session.user.image}
-                    alt={session.user.name ?? "Profile picture"}
-                  />
-                ) : null}
-                <AvatarFallback className="flex h-8 w-8 items-center justify-center overflow-hidden rounded-md border border-zinc-500 bg-zinc-100 text-zinc-700">
-                  {(session?.user.name ?? "").slice(0, 2).toUpperCase() ?? "P"}
-                </AvatarFallback>
-              </Avatar>
-              <span className="text-sm">{session?.user.name}</span>
-            </div>
-            <ChevronsUpDown className="h-4 w-4" />
-          </>
-        ) : (
+        <div className="flex w-full items-center justify-start gap-4 ">
           <Avatar>
             {session?.user.image ? (
               <AvatarImage
@@ -51,9 +33,10 @@ export function UserNav({ isCollapsed }: { isCollapsed: boolean }) {
               {(session?.user.name ?? "").slice(0, 2).toUpperCase() ?? "P"}
             </AvatarFallback>
           </Avatar>
-        )}
+          <span className="text-sm">{session?.user.name}</span>
+        </div>
+        <ChevronsUpDown className="h-4 w-4" />
       </DropdownMenuTrigger>
-
       <DropdownMenuContent className="w-full lg:w-56" align="end" forceMount>
         <DropdownMenuGroup>
           <Link href="/">

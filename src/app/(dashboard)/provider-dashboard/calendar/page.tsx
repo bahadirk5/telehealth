@@ -2,19 +2,23 @@ import Link from "next/link"
 
 import { getSchedule } from "@/lib/data"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
 import { EventCalendar } from "@/components/calendar/calendar"
+import { Particles } from "@/components/particals"
 
 export default async function CalendarPage() {
   const schedule = await getSchedule()
 
   if (!schedule || schedule.selectedDays.length === 0)
     return (
-      <Card className="mx-auto max-w-md">
-        <CardContent className="flex flex-col items-center justify-center space-y-4 p-6">
-          <IconClock className="h-16 w-16 text-gray-500 dark:text-gray-400" />
-          <h2 className="text-xl font-semibold">No Schedule Available</h2>
-          <p className="text-gray-500 dark:text-gray-400">
+      <div className="relative mx-auto mt-8 max-w-7xl px-4 sm:px-6 lg:px-8">
+        <Particles
+          className="absolute inset-0 -z-10 opacity-50"
+          quantity={30}
+        />
+        <div className="relative flex h-full flex-1 flex-col items-center gap-4 p-8">
+          <IconClock className="h-10 w-10" />
+          <h3 className="mt-2 font-semibold">No Schedule Available</h3>
+          <p className="mt-1 text-sm">
             There are currently no events or tasks scheduled.
           </p>
           <Button asChild>
@@ -22,8 +26,8 @@ export default async function CalendarPage() {
               Calendar Config
             </Link>
           </Button>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
     )
 
   return <EventCalendar schedule={schedule} />
