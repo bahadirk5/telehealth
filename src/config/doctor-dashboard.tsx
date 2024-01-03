@@ -1,4 +1,4 @@
-import { Calendar, KanbanSquare, Settings } from "lucide-react"
+import { Calendar, KanbanSquare, Monitor, Settings } from "lucide-react"
 
 import { DoctorDashboardItem } from "@/types/doctor-dasboard"
 
@@ -17,5 +17,10 @@ export const SIDENAV_ITEMS: DoctorDashboardItem[] = [
     title: "Settings",
     path: "/provider-dashboard/settings",
     icon: Settings,
+  },
+  {
+    title: "Room",
+    path: "/provider-dashboard/room",
+    icon: Monitor,
   },
 ]
