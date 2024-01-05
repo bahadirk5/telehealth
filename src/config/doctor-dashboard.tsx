@@ -18,9 +18,4 @@ export const SIDENAV_ITEMS: DoctorDashboardItem[] = [
     path: "/provider-dashboard/settings",
     icon: Settings,
   },
-  {
-    title: "Room",
-    path: "/provider-dashboard/room",
-    icon: Monitor,
-  },
 ]

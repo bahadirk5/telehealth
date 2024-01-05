@@ -63,14 +63,25 @@ model User {
 }
 
 model Provider {
-  userId          String  @unique
-  image           String?
+  userId          String                @unique
+  image           ProviderProfileImage?
   specialty       String
   meetingDuration Int?
 
   schedule     Schedule?
-  user         User          @relation(fields: [userId], references: [id])
+  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
   appointments Appointment[]
+
+  @@index([userId])
+}
+
+model ProviderProfileImage {
+  id     String @id @default(cuid())
+  key    String
+  url    String
+  userId String @unique
+
+  provider Provider @relation(fields: [userId], references: [userId], onDelete: Cascade)
 
   @@index([userId])
 }
@@ -83,7 +94,7 @@ model Appointment {
   providerId  String
 
   timeSlot TimeSlot @relation(fields: [slotId], references: [id])
-  provider Provider @relation(fields: [providerId], references: [userId])
+  provider Provider @relation(fields: [providerId], references: [userId], onDelete: Cascade)
 
   @@index([slotId])
   @@index([providerId])
@@ -98,7 +109,7 @@ model Schedule {
 
   selectedDays SelectedDay[]
 
-  provider Provider? @relation(fields: [providerId], references: [userId])
+  provider Provider? @relation(fields: [providerId], references: [userId], onDelete: Cascade)
 
   @@index([providerId])
   @@map("schedule")
@@ -111,7 +122,7 @@ model SelectedDay {
 
   timeSlots TimeSlot[]
 
-  schedule Schedule @relation(fields: [scheduleId], references: [id])
+  schedule Schedule @relation(fields: [scheduleId], references: [id], onDelete: Cascade)
 
   @@unique([day, scheduleId])
   @@index([scheduleId])
@@ -123,7 +134,7 @@ model TimeSlot {
   endTime       String
   selectedDayId String
 
-  selectedDay SelectedDay   @relation(fields: [selectedDayId], references: [id])
+  selectedDay SelectedDay   @relation(fields: [selectedDayId], references: [id], onDelete: Cascade)
   Appointment Appointment[]
 
   @@index([selectedDayId])

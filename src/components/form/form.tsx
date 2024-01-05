@@ -6,14 +6,13 @@ import { useFormStatus } from "react-dom"
 import { toast } from "sonner"
 
 import { cn } from "@/lib/utils"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
 import { Icons } from "@/components/icons"
-import Uploader from "@/components/uploader"
+import { Uploader } from "@/components/uploader"
 
-import { Button } from "../ui/button"
-import { Input } from "../ui/input"
-import { Label } from "../ui/label"
-
-export default function Form({
+export function Form({
   title,
   description,
   helpText,

@@ -14,7 +14,7 @@ export async function DesktopSidebar() {
   return (
     <aside className="relative hidden min-h-screen border-r border-border pb-12 lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
       <Link
-        href="/overview"
+        href="/provider-dashboard"
         className="flex items-center gap-2 px-8 py-6 text-2xl font-semibold tracking-tight"
       >
         Tele Health

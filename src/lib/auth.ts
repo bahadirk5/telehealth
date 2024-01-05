@@ -28,8 +28,8 @@ export const authOptions: NextAuthOptions = {
         token.id = user.id
         token.role = user.role
       }
-      if (trigger === "update" && session?.role) {
-        token.role = session.role
+      if (trigger === "update") {
+        return { ...token, ...session }
       }
       return token
     },

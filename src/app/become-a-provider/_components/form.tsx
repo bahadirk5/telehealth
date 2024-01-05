@@ -38,7 +38,7 @@ export function BecomeAProviderForm() {
   })
 
   const [isSaving, setIsSaving] = React.useState<boolean>(false)
-  const { data: session, status, update } = useSession()
+  const { update } = useSession()
   const router = useRouter()
 
   async function onSubmit(values: z.infer<typeof formSchema>) {

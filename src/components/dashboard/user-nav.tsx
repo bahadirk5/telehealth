@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { AvatarFallback } from "@radix-ui/react-avatar"
-import { Book, ChevronsUpDown, LogOut, Rocket } from "lucide-react"
+import { ChevronsUpDown, LogOut, Monitor, Rocket } from "lucide-react"
 import { signOut, useSession } from "next-auth/react"
 
 import { Avatar, AvatarImage } from "@/components/ui/avatar"
@@ -45,10 +45,10 @@ export function UserNav() {
               <span>Main site</span>
             </DropdownMenuItem>
           </Link>
-          <Link href="/provider-dashboard">
+          <Link href="/room">
             <DropdownMenuItem>
-              <Book className="mr-2 h-4 w-4" />
-              <span>Docs</span>
+              <Monitor className="mr-2 h-4 w-4" />
+              <span>Room</span>
             </DropdownMenuItem>
           </Link>
         </DropdownMenuGroup>

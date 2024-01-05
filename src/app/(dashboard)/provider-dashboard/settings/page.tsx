@@ -1,29 +1,9 @@
-import { getServerAuthSession } from "@/lib/auth"
-import Form from "@/components/form/form"
+import { editUser, uploadFiles } from "@/lib/actions"
+import { getCurrentProvider } from "@/lib/data"
+import { Form } from "@/components/form/form"
 
 export default async function Settings() {
-  const session = await getServerAuthSession()
-
-  async function editUser(formData: FormData, _id: unknown, key: string) {
-    "use server"
-    const value = formData.get(key) as string
-
-    try {
-      await new Promise((resolve) => setTimeout(resolve, 1000))
-      console.log(value)
-      return { message: "success" }
-    } catch (error: any) {
-      if (error.code === "P2002") {
-        return {
-          error: `This ${key} is already in use`,
-        }
-      } else {
-        return {
-          error: error.message,
-        }
-      }
-    }
-  }
+  const provider = await getCurrentProvider()
 
   return (
     <>
@@ -34,8 +14,7 @@ export default async function Settings() {
         inputAttrs={{
           name: "name",
           type: "text",
-          defaultValue: session?.user.name!,
-          placeholder: "Brendon Urie",
+          defaultValue: provider?.name!,
           maxLength: 32,
         }}
         handleSubmit={editUser}
@@ -47,8 +26,7 @@ export default async function Settings() {
         inputAttrs={{
           name: "email",
           type: "email",
-          defaultValue: session?.user.email!,
-          placeholder: "panic@thedis.co",
+          defaultValue: provider?.email!,
         }}
         handleSubmit={editUser}
       />
@@ -59,9 +37,9 @@ export default async function Settings() {
         inputAttrs={{
           name: "image",
           type: "image",
-          defaultValue: session?.user.image ? session?.user.image : "",
+          defaultValue: provider?.image!,
         }}
-        handleSubmit={editUser}
+        handleSubmit={uploadFiles}
       />
     </>
   )

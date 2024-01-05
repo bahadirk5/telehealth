@@ -5,7 +5,7 @@ import { toast } from "sonner"
 
 import { cn } from "@/lib/utils"
 
-export default function Uploader({
+export function Uploader({
   defaultValue,
   name,
 }: {
@@ -93,7 +93,7 @@ export default function Uploader({
           <svg
             className={`${
               dragActive ? "scale-110" : "scale-100"
-            } h-7 w-7 text-gray-500 transition-all duration-75 group-hover:scale-110 group-active:scale-95`}
+            } h-7 w-7 text-slate-500 transition-all duration-75 group-hover:scale-110 group-active:scale-95`}
             xmlns="http://www.w3.org/2000/svg"
             width="24"
             height="24"
@@ -108,10 +108,10 @@ export default function Uploader({
             <path d="M12 12v9"></path>
             <path d="m16 16-4-4-4 4"></path>
           </svg>
-          <p className="mt-2 text-center text-sm text-gray-500">
+          <p className="mt-2 text-center text-sm text-slate-500">
             Drag and drop or click to upload.
           </p>
-          <p className="mt-2 text-center text-sm text-gray-500">
+          <p className="mt-2 text-center text-sm text-slate-500">
             Max file size: 50MB
           </p>
           <span className="sr-only">Photo upload</span>

@@ -1,5 +1,5 @@
 import { DashboardHeader } from "@/components/dashboard/dashboard-header"
-import Uploader from "@/components/uploader"
+import { Uploader } from "@/components/uploader"
 
 export default function Overview() {
   return (
