@@ -64,26 +64,77 @@ model User {
 
 model Provider {
   userId          String                @unique
-  image           ProviderProfileImage?
+  profilePicture  ProviderProfileImage?
   specialty       String
+  schedule        Schedule?
   meetingDuration Int?
+  address         String?
+  latlng          Json?
+  phone_number    String?
+  about           String?               @db.Text
 
-  schedule     Schedule?
-  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  imageGallery ProviderImageGallery[]
+  language     Language[]
+  services     Services[]
+  education    Education[]
   appointments Appointment[]
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId])
 }
 
 model ProviderProfileImage {
-  id     String @id @default(cuid())
-  key    String
-  url    String
-  userId String @unique
+  id             String @id @default(cuid())
+  key            String
+  url            String
+  providerUserId String @unique
 
-  provider Provider @relation(fields: [userId], references: [userId], onDelete: Cascade)
+  provider Provider @relation(fields: [providerUserId], references: [userId], onDelete: Cascade)
 
-  @@index([userId])
+  @@index([providerUserId])
+}
+
+model ProviderImageGallery {
+  id             String @id @default(cuid())
+  key            String
+  url            String
+  providerUserId String
+
+  provider Provider @relation(fields: [providerUserId], references: [userId])
+
+  @@index([providerUserId])
+}
+
+model Language {
+  id             String @id @default(cuid())
+  name           String
+  providerUserId String
+
+  Provider Provider @relation(fields: [providerUserId], references: [userId])
+
+  @@index([providerUserId])
+}
+
+model Services {
+  id             String @id @default(cuid())
+  name           String
+  type           String
+  providerUserId String
+
+  Provider Provider @relation(fields: [providerUserId], references: [userId])
+
+  @@index([providerUserId])
+}
+
+model Education {
+  id             String  @id @default(cuid())
+  education      String
+  providerUserId String?
+
+  provider Provider? @relation(fields: [providerUserId], references: [userId])
+
+  @@index([providerUserId])
 }
 
 model Appointment {

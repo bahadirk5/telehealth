@@ -18,6 +18,21 @@ export default async function DashboardLayout({
       path: "/provider-dashboard/settings/specialty",
       disabled: false,
     },
+    {
+      title: "Address",
+      path: "/provider-dashboard/settings/address",
+      disabled: true,
+    },
+    {
+      title: "Resume",
+      path: "/provider-dashboard/settings/resume",
+      disabled: true,
+    },
+    {
+      title: "Services",
+      path: "/provider-dashboard/settings/services",
+      disabled: true,
+    },
   ]
   return (
     <div className="flex max-w-screen-xl flex-col">
