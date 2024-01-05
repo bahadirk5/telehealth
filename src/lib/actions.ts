@@ -64,7 +64,7 @@ export async function uploadFiles(
     const { key: uploadedKey, url: uploadedUrl } = uploadResponse.data
 
     const existingImage = await db.providerProfileImage.findFirst({
-      where: { userId: userId },
+      where: { providerUserId: userId },
     })
 
     if (existingImage) {
@@ -84,7 +84,7 @@ export async function uploadFiles(
         data: {
           key: uploadedKey,
           url: uploadedUrl,
-          userId: userId,
+          providerUserId: userId,
         },
       })
     }
