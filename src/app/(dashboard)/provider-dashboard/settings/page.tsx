@@ -1,4 +1,4 @@
-import { editUser, uploadFiles } from "@/lib/actions"
+import { editUser, uploadProviderProfileImage } from "@/lib/actions"
 import { getCurrentProvider } from "@/lib/data"
 import { Form } from "@/components/form/form"
 
@@ -39,7 +39,7 @@ export default async function Settings() {
           type: "image",
           defaultValue: provider?.image!,
         }}
-        handleSubmit={uploadFiles}
+        handleSubmit={uploadProviderProfileImage}
       />
     </>
   )

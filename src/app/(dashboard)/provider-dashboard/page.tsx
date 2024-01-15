@@ -1,5 +1,5 @@
 import { DashboardHeader } from "@/components/dashboard/dashboard-header"
-import { Uploader } from "@/components/uploader"
+import { MultipleFileUploader } from "@/components/multiple-uploader"
 
 export default function Overview() {
   return (
@@ -11,7 +11,7 @@ export default function Overview() {
         ></DashboardHeader>
       </div>
       <div className="space-y-10">
-        <Uploader defaultValue={null} name="image" />
+        <MultipleFileUploader defaultValue={null} name="imageGallery" />
       </div>
     </>
   )

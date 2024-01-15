@@ -25,7 +25,7 @@ export function UserAccountNav() {
               name: session.user.name as string,
               image: session.user.image || null,
             }}
-            className="h-8 w-8"
+            className="h-10 w-10"
           />
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">

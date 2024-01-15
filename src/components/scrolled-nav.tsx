@@ -12,9 +12,12 @@ export default function ScrolledNav({
 
   return (
     <header
-      className={cn(`sticky inset-x-0 top-0 z-30 w-full transition-all`, {
-        "border-b border-gray-200 bg-white/75 backdrop-blur-lg": scrolled,
-      })}
+      className={cn(
+        "sticky inset-x-0 top-0 z-30 w-full border-b transition-all",
+        {
+          "bg-background/75 backdrop-blur-lg": scrolled,
+        }
+      )}
     >
       {children}
     </header>

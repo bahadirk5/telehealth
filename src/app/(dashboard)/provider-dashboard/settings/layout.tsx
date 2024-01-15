@@ -14,19 +14,14 @@ export default async function DashboardLayout({
       disabled: false,
     },
     {
-      title: "Specialty",
-      path: "/provider-dashboard/settings/specialty",
-      disabled: false,
-    },
-    {
       title: "Address",
       path: "/provider-dashboard/settings/address",
-      disabled: true,
+      disabled: false,
     },
     {
       title: "Resume",
       path: "/provider-dashboard/settings/resume",
-      disabled: true,
+      disabled: false,
     },
     {
       title: "Services",

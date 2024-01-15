@@ -97,7 +97,7 @@ model ProviderProfileImage {
 
 model ProviderImageGallery {
   id             String @id @default(cuid())
-  key            String
+  key            String @unique
   url            String
   providerUserId String
 

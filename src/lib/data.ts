@@ -8,7 +8,13 @@ export async function getCurrentProvider() {
   if (!session) return null
   return await db.user.findFirst({
     where: { id: session.user.id },
-    include: { provider: true },
+    include: {
+      provider: {
+        include: {
+          imageGallery: true,
+        },
+      },
+    },
   })
 }
 

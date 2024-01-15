@@ -1,7 +1,6 @@
 "use client"
 
 import { useParams, useRouter } from "next/navigation"
-import { useSession } from "next-auth/react"
 import { useFormStatus } from "react-dom"
 import { toast } from "sonner"
 
@@ -9,7 +8,9 @@ import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { Textarea } from "@/components/ui/textarea"
 import { Icons } from "@/components/icons"
+import { MultipleFileUploader } from "@/components/multiple-uploader"
 import { Uploader } from "@/components/uploader"
 
 export function Form({
@@ -25,7 +26,7 @@ export function Form({
   inputAttrs: {
     name: string
     type: string
-    defaultValue: string
+    defaultValue: string | string[]
     placeholder?: string
     maxLength?: number
     pattern?: string
@@ -34,7 +35,7 @@ export function Form({
 }) {
   const { id } = useParams() as { id?: string }
   const router = useRouter()
-  const { update } = useSession()
+
   return (
     <form
       action={async (data: FormData) => {
@@ -45,7 +46,6 @@ export function Form({
             if (id) {
               router.refresh()
             } else {
-              await update()
               router.refresh()
             }
             toast.success(`Successfully updated ${inputAttrs.name}!`)
@@ -59,15 +59,31 @@ export function Form({
           {title}
         </h4>
         <Label>{description}</Label>
-        {inputAttrs.name === "image" || inputAttrs.name === "logo" ? (
+        {inputAttrs.name === "image" ? (
           <Uploader
-            defaultValue={inputAttrs.defaultValue}
+            defaultValue={
+              typeof inputAttrs.defaultValue === "string"
+                ? inputAttrs.defaultValue
+                : ""
+            }
             name={inputAttrs.name}
           />
-        ) : inputAttrs.name === "description" ? (
-          <textarea
+        ) : inputAttrs.name === "imageGallery" ? (
+          <MultipleFileUploader
+            defaultValue={
+              Array.isArray(inputAttrs.defaultValue)
+                ? inputAttrs.defaultValue.map((item) => {
+                    // @ts-ignore
+                    return { url: item.url, key: item.key }
+                  })
+                : []
+            }
+            name={inputAttrs.name}
+          />
+        ) : inputAttrs.type === "textarea" ? (
+          <Textarea
             {...inputAttrs}
-            rows={3}
+            rows={5}
             required
             className="w-full max-w-xl rounded-md border border-stone-300 text-sm text-stone-900 placeholder-stone-300 focus:border-stone-500 focus:outline-none focus:ring-stone-500 dark:border-stone-600 dark:bg-black dark:text-white dark:placeholder-stone-700"
           />
