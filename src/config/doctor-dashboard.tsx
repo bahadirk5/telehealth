@@ -1,4 +1,4 @@
-import { Calendar, KanbanSquare, Monitor, Settings } from "lucide-react"
+import { Calendar, KanbanSquare, Settings } from "lucide-react"
 
 import { DoctorDashboardItem } from "@/types/doctor-dasboard"
 
