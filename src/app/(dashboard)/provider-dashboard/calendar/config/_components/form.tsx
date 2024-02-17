@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { WeekDay } from "@prisma/client"
 import axios from "axios"
+import { Plus, X } from "lucide-react"
 import { Controller, useFieldArray, useForm } from "react-hook-form"
 import { toast } from "sonner"
 import { z } from "zod"
@@ -145,14 +146,11 @@ export function CalendarConfigForm({ defaultValues }: CalendarConfigFormProps) {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="mt-5 space-y-8">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         {weekDays.map((day) => (
-          <div
-            key={day}
-            className="rounded-lg border border-border bg-card p-4 shadow-sm"
-          >
-            <div className="grid grid-cols-[1fr_1fr_2fr] items-center gap-4">
-              <div className="flex items-center space-x-3">
+          <div key={day}>
+            <div className="rounded-lg border border-border bg-card p-4 shadow-sm">
+              <div className="mb-5 flex items-center space-x-3">
                 <Switch
                   id={day}
                   {...register("selectedDays")}
@@ -178,21 +176,25 @@ export function CalendarConfigForm({ defaultValues }: CalendarConfigFormProps) {
                         name={`timeRanges.${day}.${index}.end`}
                         control={control}
                       />
-                      <button
+                      <Button
+                        variant="outline"
+                        size="icon"
+                        className="p-3"
                         onClick={() => fieldArrays[day].remove(index)}
-                        className="text-destructive"
                       >
-                        X
-                      </button>
+                        <X className="h-4 w-4" />
+                      </Button>
                     </div>
                   ))}
                   <div className="flex justify-center">
                     <Button
                       type="button"
+                      size="sm"
                       onClick={() =>
                         fieldArrays[day].append({ start: "", end: "" })
                       }
                     >
+                      <Plus className="mr-2 h-4 w-4" />
                       Add Time Range
                     </Button>
                   </div>

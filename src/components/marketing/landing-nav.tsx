@@ -14,12 +14,12 @@ export async function LandingNavbar() {
           <div className="flex items-center space-x-4">
             <Link href="/" className="flex flex-row items-center font-bold">
               <div className="mr-1 flex gap-1 items-center">
-                <Clover className="h-12 w-12" />
+                <Clover className="h-9 w-9" />
                 <span className="text-xl">TeleHealth</span>
               </div>
             </Link>
           </div>
-          <div className="hidden items-center gap-4 md:flex">
+          <div className="hidden items-center gap-2 md:flex">
             <Button variant="outline">How it works</Button>
             <ThemeToggle />
             <UserAccountNav />

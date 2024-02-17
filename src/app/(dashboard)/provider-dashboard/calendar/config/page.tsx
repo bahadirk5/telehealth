@@ -2,8 +2,9 @@ import { WeekDay } from "@prisma/client"
 
 import { getServerAuthSession } from "@/lib/auth"
 import { db } from "@/lib/db"
-import { DashboardHeader } from "@/components/dashboard/dashboard-header"
+import { Separator } from "@/components/ui/separator"
 
+import { DateOverride } from "./_components/date-override"
 import { CalendarConfigForm } from "./_components/form"
 
 type TimeSlot = {
@@ -66,5 +67,10 @@ export default async function Config() {
     timeRanges: {},
   }
 
-  return <CalendarConfigForm defaultValues={schedule || defaultFormValues} />
+  return (
+    <div className="grid gap-4 md:grid-cols-2">
+      <CalendarConfigForm defaultValues={schedule || defaultFormValues} />
+      <DateOverride />
+    </div>
+  )
 }
