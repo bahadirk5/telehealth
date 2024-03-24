@@ -6,6 +6,7 @@ import { db } from "@/lib/db"
 export async function getCurrentProvider() {
   const session = await getServerAuthSession()
   if (!session) return null
+
   return await db.user.findFirst({
     where: { id: session.user.id },
     include: {
@@ -20,7 +21,6 @@ export async function getCurrentProvider() {
 
 export async function getSchedule() {
   const session = await getServerAuthSession()
-
   if (!session) return null
 
   return await db.schedule.findUnique({
@@ -35,6 +35,23 @@ export async function getSchedule() {
               endTime: true,
             },
           },
+        },
+      },
+    },
+  })
+}
+
+export async function getProviders() {
+  await new Promise((resolve) => setTimeout(resolve, 500))
+
+  return await db.provider.findMany({
+    select: {
+      userId: true,
+      specialty: true,
+      user: {
+        select: {
+          name: true,
+          image: true,
         },
       },
     },

@@ -14,19 +14,17 @@ import {
 } from "@/components/ui/card"
 import { CarouselItem } from "@/components/ui/carousel"
 
-interface CategoriesCardProps {
-  title: string
-  description: string
-  image: string
-  path: string
-}
-
 export function CategoriesCard({
   title,
   description,
   image,
   path,
-}: CategoriesCardProps) {
+}: {
+  title: string
+  description: string
+  image: string
+  path: string
+}) {
   return (
     <CarouselItem className="w-full flex-none pl-6 md:w-2/3 lg:w-2/5">
       <Card className="relative h-80 w-full overflow-hidden">

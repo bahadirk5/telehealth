@@ -1,3 +1,4 @@
+import { LandingFooter } from "@/components/marketing/footer"
 import { LandingNavbar } from "@/components/marketing/landing-nav"
 
 interface LayoutProps {
@@ -9,6 +10,7 @@ export default function Layout({ children }: LayoutProps) {
     <>
       <LandingNavbar />
       {children}
+      <LandingFooter />
     </>
   )
 }
